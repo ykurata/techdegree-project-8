@@ -25,3 +25,6 @@ class Mineral(models.Model):
 
     def __str__(self):
         return self.name
+
+    def first_letter(self):
+        return self.name and self.name[0] or ""       

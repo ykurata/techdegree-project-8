@@ -5,4 +5,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.mineral_list, name='list'),
     url(r'(?P<pk>\d+)/$', views.mineral_detail, name='detail'),
+    url(r'search/$', views.search, name="search"),
+    url(r'list/(?P<letter>[a-z])$', views.first_letter, name="first_letter")
 ]

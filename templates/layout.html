@@ -3,6 +3,7 @@
 <!doctype html>
 <html lang="en">
     <head>
+        </form>
         <meta charset="utf-8">
         <title>{% block title %}Yasuko's Mineral{% endblock %}</title>
         <meta name="description" content="">
@@ -11,6 +12,32 @@
         <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/global.css' %}">
+        <!-- Search from -->
+        <section class="top-bar-right">
+            <form action="{% url 'minerals:search' %}" method="GET">
+                <ul class="menu">
+                    <li><input type="search" name="q"></li>
+                    <li><button type="button" class="secondary small button">Search</button></li>
+                </ul>
+            </form>
+        </section>
+        
+        <div class="first-letter">
+
+        {% regroup minerals by first_letter as alphabet %}
+        <ul>
+        {% for letter in alphabet %}
+            <li>{{ letter.grouper }}
+                <ul>
+                    {% for mineral in letter.list %}
+                      <li><a href="{% url 'minerals:first_letter' %}" class="bottom">{{ letter }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+        </div>
+
         {% block content %}{% endblock %}
     </head>
     <body>
