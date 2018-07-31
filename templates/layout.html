@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load mineral_extras %}
 
 <!doctype html>
 <html lang="en">
@@ -12,30 +13,30 @@
         <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/global.css' %}">
+        {% block static %}{% endblock %}
         <!-- Search from -->
-        <section class="top-bar-right">
+        <section style="position: absolute; top: 0; right: 0;">
             <form action="{% url 'minerals:search' %}" method="GET">
-                <ul class="menu">
-                    <li><input type="search" name="q"></li>
-                    <li><button type="button" class="secondary small button">Search</button></li>
-                </ul>
+                    <input type="search" name="q">
+                    <button type="button" class="secondary small button">Search</button>
             </form>
         </section>
-        
-        <div class="first-letter">
 
-        {% regroup minerals by first_letter as alphabet %}
-        <ul>
-        {% for letter in alphabet %}
-            <li>{{ letter.grouper }}
-                <ul>
-                    {% for mineral in letter.list %}
-                      <li><a href="{% url 'minerals:first_letter' %}" class="bottom">{{ letter }}</a></li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-        </ul>
+        <!-- Search by letter -->
+        <div class="letter">
+            <h3>Search by letter</h3>
+            {% for i in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                <span style="font-size: 20px;">
+                    <a {% if i == letter %} style="font-weight: 900;" {% endif %} href="{% url 'minerals:alphabet' letter=i %}">{{ i }}</a>
+                </span>
+            {% endfor %}
+        </div>
+        </br>
+        
+        <!--Search by mineral group -->
+        <div>
+            <h3>Search by group</h3>
+            {% group_list selected_group %}
         </div>
 
         {% block content %}{% endblock %}
@@ -43,7 +44,7 @@
     <body>
         </div>
         <div class="minerals__random">
-            <a class="minerals__anchor" href="">Show random mineral</a>
+            <a class="minerals__anchor" href="{% url 'minerals:random' %}">Show random mineral</a>
         </div>
     </body>
 </html>

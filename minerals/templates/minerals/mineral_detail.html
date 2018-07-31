@@ -121,6 +121,12 @@
                         <td>{{ mineral.specific_gravity }}</td>
                     </tr>
                 {% endif %}
+                {% if mineral.group %}
+                    <tr>
+                        <td class="mineral__category">Group</td>
+                        <td>{{ mineral.group }}</td>
+                    </tr>
+                {% endif %}
             </table>
         </div>
     </div>

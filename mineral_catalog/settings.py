@@ -107,6 +107,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
 
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda x: True
-}
+INTERNAL_IPS = ['127.0.0.1', ]

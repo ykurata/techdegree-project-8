@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Mineral',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('name', models.CharField(max_length=255)),
                 ('image_filename', models.ImageField(upload_to='', verbose_name='Uploaded image')),
                 ('image_caption', models.CharField(max_length=255, blank=True)),
@@ -33,6 +33,7 @@ class Migration(migrations.Migration):
                 ('refractive_index', models.CharField(max_length=255, blank=True)),
                 ('crystal_habit', models.CharField(max_length=255, blank=True)),
                 ('specific_gravity', models.CharField(max_length=255, blank=True)),
+                ('group', models.CharField(max_length=255, blank=True)),
             ],
         ),
     ]
