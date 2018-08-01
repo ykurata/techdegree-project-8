@@ -1,5 +1,5 @@
 {% for group in groups %}
-  <ul>
-    <span {% if group ==  selected_group %} style="font-weight: 900;"{% endif %}><a href="{% url 'minerals:group' group=group %}">{{ group }}</a></span>
-  </ul>
+  <div class="group">
+      <a {% if group ==  selected_group %} style="font-weight: 900; font-size: 18px;"{% endif %} href="{% url 'minerals:group' group=group %}">{{ group }}</a>
+  </div>
 {% endfor %}

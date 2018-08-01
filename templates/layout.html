@@ -13,36 +13,37 @@
         <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/global.css' %}">
-        {% block static %}{% endblock %}
+
         <!-- Search from -->
-        <section style="position: absolute; top: 0; right: 0;">
+        <section style="position: absolute; top: 10px; right: 10px;">
             <form action="{% url 'minerals:search' %}" method="GET">
                     <input type="search" name="q">
                     <button type="button" class="secondary small button">Search</button>
             </form>
         </section>
-
         <!-- Search by letter -->
-        <div class="letter">
+        <div style="margin-left: 15px; margin-top: 10px;">
             <h3>Search by letter</h3>
             {% for i in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
                 <span style="font-size: 20px;">
-                    <a {% if i == letter %} style="font-weight: 900;" {% endif %} href="{% url 'minerals:alphabet' letter=i %}">{{ i }}</a>
+                    <a {% if i == letter %} style="font-size:25px; font-weight: 900;" {% endif %} href="{% url 'minerals:alphabet' letter=i %}">{{ i }}</a>
                 </span>
             {% endfor %}
+            <span style="font-size: 20px;">
+                <a href="{% url 'minerals:list' %}">All</a>
+            </span>
         </div>
         </br>
-        
         <!--Search by mineral group -->
         <div>
-            <h3>Search by group</h3>
-            {% group_list selected_group %}
+            <div class="grid-15">
+                <h3>Search by group</h3>
+                {% group_list selected_group %}
+            </div>
         </div>
-
-        {% block content %}{% endblock %}
     </head>
     <body>
-        </div>
+        {% block content %}{% endblock %}
         <div class="minerals__random">
             <a class="minerals__anchor" href="{% url 'minerals:random' %}">Show random mineral</a>
         </div>

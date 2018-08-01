@@ -34,7 +34,10 @@ def search(request):
 
 
 def search_by_letter(request, letter):
-    minerals = Mineral.objects.filter(name__istartswith=letter)
+    if not letter:
+        minerals = Mineral.objects.filter(name__istartswith="A")
+    else:
+        minerals = Mineral.objects.filter(name__istartswith=letter)
     return render(request, 'minerals/mineral_list.html', {
         'minerals': minerals,
         'letter': letter
