@@ -31,11 +31,13 @@ class MineralModelTests(TestCase):
         )
 
     def test_mineral_creation(self):
+        """ Mineral model test"""
         mineral = self.mineral
         self.assertTrue(isinstance(mineral, Mineral))
 
 
     def test_mineral_list_view(self):
+        """ Mineral list view"""
         resp = self.client.get(reverse('minerals:list'))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.mineral, resp.context['minerals'])
@@ -45,6 +47,7 @@ class MineralModelTests(TestCase):
 
 
     def test_mineral_detail_view(self):
+        """Mineral detail view"""
         resp = self.client.get(reverse('minerals:detail',
                                         kwargs={'pk': self.mineral.pk}))
         self.assertEqual(resp.status_code, 200)
@@ -53,20 +56,26 @@ class MineralModelTests(TestCase):
 
 
     def test_random_mineral_view(self):
+        """Random mineral view"""
         resp = self.client.get(reverse('minerals:random'))
         self.assertEqual(resp.status_code, 200)
         self.assertNotEqual(self.mineral, resp.context['mineral'])
         self.assertTemplateUsed(resp, 'minerals/mineral_detail.html')
 
-    """
+
     def test_search_view(self):
-        resp = self.client.get(reverse('minerals:search'))
+        """Search view"""
+        resp = self.client.get(reverse('minerals:search'), {'q': 'Abe'})
         self.assertEqual(resp.status_code, 200)
-    """
+        self.assertIn(self.mineral, resp.context['minerals'])
+        self.assertNotIn(self.mineral2, resp.context['minerals'])
+        self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
+
 
     def test_search_by_letter_view(self):
+        """Search by alphabet letter"""
         resp = self.client.get(reverse('minerals:alphabet',
-                            kwargs={'letter': self.mineral.name[0]}))
+                            kwargs={'letter': 'A'}))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.mineral, resp.context['minerals'])
         self.assertNotIn(self.mineral2, resp.context['minerals'])
@@ -74,6 +83,7 @@ class MineralModelTests(TestCase):
 
 
     def test_search_by_group_view(self):
+        """Search by mineral group name"""
         resp = self.client.get(reverse('minerals:group',
                                 kwargs={'group': self.mineral.group}))
         self.assertEqual(resp.status_code, 200)
