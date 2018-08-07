@@ -10,7 +10,7 @@ def load_json(apps, schema_editor):
     # import Mineral model
     Mineral = apps.get_model('minerals', 'Mineral')
 
-    with open('minerals.json') as datafile:
+    with open('minerals.json', encoding="utf-8") as datafile:
         minerals = json.load(datafile)
         for mineral in minerals:
             Mineral(
