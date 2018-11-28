@@ -53,3 +53,11 @@ def search_by_group(request, group):
         'minerals': minerals,
         'selected_group': group
     })
+
+
+def search_by_color(request, color):
+    minerals = Mineral.objects.filter(color__icontains=color)
+    return render(request, 'minerals/mineral_list.html', {
+        'minerals': minerals,
+        'selected_color': color
+    })

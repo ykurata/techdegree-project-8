@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'random/$', views.random_mineral, name='random'),
     url(r'search/(?P<letter>[A-Z])$', views.search_by_letter, name="alphabet"),
     url(r'group/(?P<group>[\w\s]+)/$', views.search_by_group, name='group'),
+    url(r'color/(?P<color>[\w\s]+)$', views.search_by_color, name='color'),
 ]

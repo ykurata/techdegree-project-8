@@ -1,0 +1,5 @@
+{% for color in colors %}
+  <div>
+    <a {% if color ==  selected_color %} style="font-weight: 900; font-size: 18px;"{% endif %} href="{% url 'minerals:color' color=color}">{{ color }}</a>
+  </div>
+{% endfor %}
